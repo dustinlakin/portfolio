@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dustin Lakin</title>
+    <meta name="description" content="Software Engineer in Santa Monica with experience in Full-Stack Development.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="scss/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js"></script>
+    <script src="data.js"></script>
+    <script src="js/vendor/underscore.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-app="portfolioApp">
+    <div class="background-image"></div>
+    <div class="page-container"
+        ng-controller="portfolioCtrl">
+        <nav class="top-heading">
+            <img src="images/59_square.jpg" class="headshot">
+            <h1>Dustin Lakin</h1>
+            <h2>Software Engineer</h2>
+            <p>
+                Independent Contractor in Santa Monica
+            </p>
+            <p>
+                B.S. in Computer Science from UC Irvine
+            </p>
+            <div class="social">
+                <a href="https://github.com/dustinlakin">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a href="https://twitter.com/dustinlakin">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/dustinlakin">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+                <a href="mailto:dustin.lakin@gmail.com">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </div>
+
+            <ul>
+                <li ng-click="filterWork('all')"
+                    ng-class="{selected: selectedTag === 'all'}">
+                    all <i class="fa fa-chevron-right"></i>
+                </li>
+                <li ng-repeat="tag in tags"
+                    ng-class="{selected: selectedTag === tag}"
+                    ng-click="filterWork(tag)">
+                    {{tag}} <i class="fa fa-chevron-right"></i>
+                </li>
+            </ul>
+        </nav>
+        <div class="content">
+            <div ng-repeat="project in filteredProjects track by project.title"
+                class="single-piece">
+                <img ng-src="images/projects/{{project.image}}"/>
+                <a ng-href="{{project.url}}" target="_blank" ng-hide="project.url == null">
+                    <div class="link-container"
+                        ng-class="{'no-video': project.video == null}">
+                        <i class="fa fa-external-link-square"></i>
+                    </div>
+                </a>
+                <a ng-href="{{project.video}}" target="_blank" ng-hide="project.video == null">
+                    <div class="video-container">
+                        <i class="fa fa-youtube-play"></i>
+                    </div>
+                </a>
+                <div class="project-text">
+                    {{project.title}}<br/>
+                    <span>{{project.role}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
